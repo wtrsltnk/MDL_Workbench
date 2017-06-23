@@ -1,0 +1,980 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0038)http://articles.thewavelength.net/170/ -->
+<HTML xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<HEAD>
+<TITLE>Wavelength | Your Game Editing Resource | .qc Scripts</TITLE>
+<LINK title=Wavelength href="classic.css" type=text/css rel=stylesheet>
+<META content="Wavelength - Your Game Editing Resource" name=description>
+<META http-equiv=Content-Type content="text/html; charset=UTF-8">
+<SCRIPT type=text/javascript>
+<!--
+function newWindow(link)
+{
+	window.open(link.href);
+}
+function gotoOpt()
+{
+    location.href='/index.php?site=' + document.getElementById('modopt').value + '&id=170'
+}
+function delConfirm(id)
+{
+    if (confirm('Are you sure you wish to delete this comment?'))
+        location.href = '/index.php?site=deletecomment&id=' + id
+}
+</SCRIPT>
+
+<META content="MSHTML 6.00.2734.1600" name=GENERATOR></HEAD>
+<BODY onload="">
+	 <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=cellheader><SPAN class=contentheader>.qc Scripts 
+            </SPAN></TD></TR>
+        <TR>
+          <TD class=contenttablebody>
+            <TABLE cellSpacing=1 cellPadding=0 width="100%" border=0 align="left">
+              <TBODY>
+              <TR>
+                <TD class=contenttablecelldark>
+                  <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0 align="left">
+                    <TBODY>
+              <TR>
+                <TD class=contenttablecell>.qc scripts are simple text files, 
+                  edited in Notepad, and are needed to compile <BR>a model. They 
+                  tell studiomdl.exe where the mesh, textures and animations are 
+                  but <BR>more importantly sets up parameters that Half-Life 
+                  will need. Some of these interact <BR>with the monster's 
+                  intelligence code, the animation engine, swap skins or body 
+                  <BR>parts, play sound files, spawn sprite animations or beam 
+                  effects, and can even <BR>trigger events in a map. Keep in 
+                  mind that your model may need code written to <BR>handle these 
+                  features; they can't just exist and work from the model. This 
+                  describes <BR>the most common commands, and gives examples of 
+                  script files that can be a basis <BR>for most 
+                  others.<BR><BR><BR><BR><BR><BR><STRONG><FONT size=4>Studiomdl 
+                  Commands</FONT></STRONG><BR><BR>First is a list of the common 
+                  commands for studiomdl, with parameters, a description, 
+                  <BR>and an example:<BR><BR><BR><BR><STRONG>$modelname</STRONG> 
+                  &lt;path&gt;<BR><BR>This tells studiomdl where to put the 
+                  final compiled model.<BR><BR>example: 
+                  <STRONG>$modelname</STRONG> 
+                  "C:\Half-Life\valve\models\player\Gordon"<STRONG><BR><BR><BR><BR><BR><BR>$cd</STRONG> 
+                  &lt;path&gt;<BR><BR>This directs studiomdl to start in this 
+                  folder when looking for files. It's the <BR>same as DOS' 
+                  "<STRONG>c</STRONG>hange <STRONG>d</STRONG>irectory" 
+                  command.<BR><BR>example: <STRONG>$cd</STRONG> 
+                  "C:\Half-Life\valve\models\source\Gordon"<BR><BR><BR><BR><BR><BR><STRONG>$cdtexture</STRONG> 
+                  &lt;path&gt;<BR><BR>This tells studiomdl where the textures 
+                  are if they're in a separate folder from <BR>the 
+                  mesh.<BR><BR>example: <STRONG>$cdtexture</STRONG> 
+                  "C:\Half-Life\valve\models\source\Gordon\textures"<BR><BR><BR><BR><BR><BR><STRONG>$externaltextures</STRONG><BR><BR>This 
+                  tells studiomdl to save skin textures as a separate *t.mdl 
+                  file. The reason <BR>is skins only have to be loaded into 
+                  memory when this model is in the player's 
+                  <BR>view.<BR><BR>example: 
+                  <STRONG>$externaltextures</STRONG><BR><BR><BR><BR><BR><BR><STRONG>$cliptotextures<BR><BR></STRONG>This 
+                  tells studiomdl to compile the skin textures in with the 
+                  model. <BR>It's most commonly used with player 
+                  models.<BR><BR>example: 
+                  <STRONG>$cliptotextures</STRONG><BR><BR><BR><BR><BR><BR><STRONG>$scale</STRONG> 
+                  #<BR><BR>This resizes the model up or down. If you want it 
+                  smaller, make it less than 1; <BR>or more than 1 to make it 
+                  bigger.<BR><BR>example: <STRONG>$scale</STRONG> 
+                  1.2<BR><BR><BR><BR><BR><BR><STRONG>$origin</STRONG> &lt;X&gt; 
+                  &lt;Y&gt; &lt;Z&gt;<BR><BR>This offsets the model's origin so, 
+                  for example, it's feet are really on the ground. <BR>This is 
+                  an easy fix if it wasn't done correctly when the model was 
+                  made. It can <BR>also be put throughout the .qc file to offset 
+                  a model or animations. It's mostly <BR>used for player models 
+                  and weapons.<BR><BR>example: <STRONG>$origin</STRONG> 0 0 
+                  36<BR><BR><BR><BR><BR><BR><STRONG>$eyeposition</STRONG> 
+                  &lt;X&gt; &lt;Y&gt; &lt;Z&gt;<BR><BR>This is for monsters to 
+                  tell the game where their eyes are in reference to their 
+                  <BR>origin. The origin is usually taken from the model, or can 
+                  be redefined in the <BR>.qc file.<BR><BR>example: 
+                  <STRONG>$eyeposition</STRONG> 0 0 
+                  65<BR><BR><BR><BR><BR><BR><STRONG>$body</STRONG> &lt;smd 
+                  name&gt; [<STRONG>reverse</STRONG>]<BR><BR>This is the 
+                  reference .smd file for the model; the basic model with a 
+                  skin. It <BR>can include the <STRONG>reverse</STRONG> command, 
+                  which flips all of the face's <BR>normals around. 
+                  <STRONG>Reverse</STRONG> is used -only- in case problems occur 
+                  <BR>exporting and normals are reversed by 3D Studio 
+                  Max.<BR><BR>example: <STRONG>$body studio</STRONG> "monster" 
+                  reverse<BR><BR><BR><BR><BR><BR><STRONG>$bodygroup</STRONG> 
+                  &lt;groupname&gt; {smd groups}<BR><BR>This lets your model 
+                  have interchangeable parts. This example has a monster that 
+                  <BR>can hold a shotgun, mp5 or neither. The same setup can be 
+                  used for interchangeable <BR>heads. Don't include the .smd 
+                  extension.<BR><BR>example:<BR><BR><STRONG>$bodygroup</STRONG> 
+                  weapons<BR><BR>{<BR><BR><STRONG>studio</STRONG> 
+                  "shotgun"<BR><BR><STRONG>studio</STRONG> 
+                  "mp5"<BR><BR>blank<BR><BR>}<BR><BR><BR><BR><BR><BR><STRONG>$texturegroup</STRONG> 
+                  &lt;groupname&gt; {bmp groups}<BR><BR>This lets your model 
+                  have interchangeable skins. This example shows how the normal 
+                  <BR>body skin and normal head skin is replaced by a pain skin 
+                  for each. Be sure to <BR>include the .bmp 
+                  extension.<BR><BR>example:<BR><BR><STRONG>$texturegroup</STRONG> 
+                  pain<BR><BR>{<BR><BR>{ "body_normal.bmp" "head_normal.bmp" 
+                  }<BR><BR>{ "body_pain.bmp" "head_pain.bmp" 
+                  }<BR><BR>}<BR><BR><BR><BR><BR><BR><STRONG>$renamebone</STRONG> 
+                  &lt;old bone name&gt; &lt;new bone name&gt;<BR><BR>Character 
+                  Studio versions 2.x and higher used different names for some 
+                  of the <BR>Biped's bones. If you mix models or animations from 
+                  earlier versions then they <BR>need to be called the same 
+                  thing. This command let's you easily rename all of <BR>them 
+                  during the compile, instead of having to rename them in each 
+                  .max file.<BR><BR>example: <STRONG>$renamebone</STRONG> "Bip01 
+                  R Clavicle" "Bip01 <BR>R 
+                  Arm"<BR><BR><BR><BR><BR><BR><STRONG>$include</STRONG> &lt;.qc 
+                  filename&gt;<BR><BR>This tells studiomdl to include another 
+                  .qc file in the compile.<BR><BR>example: 
+                  <STRONG>$include</STRONG> 
+                  "C:\Half-Life\valve\models\player\player_shared.qc"<BR><BR><BR><BR><BR><BR><A 
+                  name=$attachment><STRONG>$attachment</STRONG></A> &lt;#&gt; 
+                  &lt;bone&gt; <BR>&lt;X&gt; &lt;Y&gt; &lt;Z&gt;<BR><BR>These 
+                  are points referenced from bones that sprite effects are 
+                  spawned from, usually <BR>muzzleflashes for weapons. See the 
+                  <A onclick="javascript:newWindow(this);return false" 
+                  href="http://articles.thewavelength.net/#event">event</STRONG></A> 
+                  <BR>command for more details about sprites. The coordinates 
+                  are offset from the bone, <BR>not the model's 
+                  origin.<BR><BR>example: <STRONG>$attachment</STRONG> 0 "Bip01 
+                  R Hand" 20 2 
+                  5<BR><BR><BR><BR><BR><BR><STRONG>$controller</STRONG> 
+                  &lt;#&gt; &lt;bone&gt; &lt;axis of Rotation&gt; &lt;limits 
+                  <BR>of rotation&gt;<BR><BR>This allows the game to control the 
+                  rotation of bones. The most obvious example <BR>is a monster's 
+                  head, in example 1. This allows the game to rotate the head 
+                  from <BR>-60 degrees to +60 on the X axis. Example 2 shows how 
+                  the mouth controller is <BR>set up so that this monster can 
+                  talk.<BR><BR>example 1: <STRONG>$controller</STRONG> 0 "Bip01 
+                  Head" XR -60 60<BR><BR>example 2: <STRONG>$controller</STRONG> 
+                  mouth "Bone03" ZR 0 
+                  45<BR><BR><BR><BR><BR><BR><STRONG>$hbox</STRONG> &lt;group 
+                  #&gt; &lt;bone&gt; &lt;X&gt; &lt;Y&gt; &lt;Z&gt; <BR>&lt;X&gt; 
+                  &lt;Y&gt; &lt;Z&gt;<BR><BR>These define hitboxes, which are 
+                  invisible boxes around each bone used to determine <BR>where 
+                  the model is being shot at. They are divided into 8 different 
+                  groups listed <BR>below. All bones belonging in each group are 
+                  defined to that hitbox group. The <BR>two examples below show 
+                  the leg and foot being assigned to the same group, # 
+                  7.<BR><BR>example: <STRONG>$hbox</STRONG> 7 "Bip01 R Leg1" 
+                  0.31 -3.97 -2.84 17.60 <BR>3.94 2.97<BR><BR>example: 
+                  <STRONG>$hbox</STRONG> 7 "Bip01 R Foot" -0.56 -2.34 -2.19 3.81 
+                  <BR>8.00 2.66
+                  <P></P><BR>
+                  <TABLE width="100%" bgColor=#ffffff border=1><BR>
+                    <TBODY>
+                    <TR><BR>
+                      <TD width="25%"><FONT color=#000000>Hitbox 
+                      Groups:</FONT></TD><BR>
+                      <TD width="25%">&nbsp;</TD><BR>
+                      <TD width="25%">&nbsp;</TD><BR>
+                      <TD width="25%">&nbsp;</TD><BR></TR><BR>
+                    <TR><BR>
+                      <TD width="25%"><FONT color=#000000>0: 
+                      Generic</FONT></TD><BR>
+                      <TD width="25%"><FONT color=#000000>2: 
+                      Chest</FONT></TD><BR>
+                      <TD width="25%"><FONT color=#000000>4: Left 
+                      Arm</FONT></TD><BR>
+                      <TD width="25%"><FONT color=#000000>6: Left 
+                      Leg</FONT></TD><BR></TR><BR>
+                    <TR><BR>
+                      <TD width="25%"><FONT color=#000000>1: 
+Head</FONT></TD><BR>
+                      <TD width="25%"><FONT color=#000000>3: 
+                      Stomach</FONT></TD><BR>
+                      <TD width="25%"><FONT color=#000000>5: Right 
+                      Arm</FONT></TD><BR>
+                      <TD width="25%"><FONT color=#000000>7: Right 
+                      Leg</FONT></TD><BR></TR><BR></TBODY></TABLE><BR>
+                  <P align=left>The two sets of coordinates are for one corner 
+                  point of the box, <BR>and the opposite corner point. An easy 
+                  way to get these coordinates is to run <BR>studiomdl with the 
+                  <STRONG>-h</STRONG> flag and have it output to a text file 
+                  <BR>like this <STRONG>&gt;hitboxes.txt</STRONG>. Your .qc file 
+                  only needs the path <BR>and filename of your reference 
+                  model.<BR><BR>example: studiomdl.exe <STRONG>-h</STRONG> 
+                  gordon.qc <STRONG>&gt;</STRONG>hitboxes.txt<BR><BR>You can see 
+                  the hitboxes with the <A 
+                  href="http://articles.thewavelength.net/files/">model 
+                  viewers</A>, or in <BR>Half-Life using the 
+                  <STRONG>r_drawentities 3</STRONG> command described in my 
+                  <BR>list of <A<BR 
+                  />href="http://www.thewavelength.net/content/index.php?act=ST&amp;f=41&amp;t=163&amp;s="&gt;console 
+                  <BR>commands</A>.<BR><BR><BR><BR><BR><BR><STRONG>$sequencegroupsize</STRONG> 
+                  &lt;# in KB&gt;<BR><BR>This separates the animations from the 
+                  mesh into smaller files. The reason is <BR>that animations can 
+                  be loaded into memory only when needed, instead of having 
+                  <BR>to load everything in whether or not it's used. It's most 
+                  useful for monsters <BR>with scripted 
+                  sequences.<BR><BR>example: <STRONG>$sequencegroupsize</STRONG> 
+                  64<BR><BR><BR><BR><BR><BR><STRONG>$sequence</STRONG> 
+                  &lt;name&gt; "smd" [motion extraction] 
+                  <BR>[<STRONG>fps</STRONG> &lt;#&gt;] [<STRONG>blend</STRONG> 
+                  &lt;axis&gt; &lt;start&gt; <BR>&lt;end&gt;] 
+                  [<STRONG>origin</STRONG> &lt;X&gt; &lt;Y&gt; &lt;Z&gt;] 
+                  [<STRONG>scale</STRONG> <BR>&lt;#&gt;] [<STRONG>loop</STRONG>] 
+                  [<STRONG>frame</STRONG> &lt;start&gt; &lt;end&gt;] 
+                  <BR>[&lt;activity&gt; &lt;multiplier&gt;] 
+                  {<STRONG>event</STRONG> &lt;#&gt; &lt;frame&gt; 
+                  <BR>&lt;options&gt;}<BR><BR>This is just an animation file, 
+                  but it's by far the most complicated command. <BR>It includes 
+                  many other commands, which are detailed below. Then below 
+                  those <BR>are <A<BR />href="#$sequence 
+                  examples"&gt;examples</A> using the <STRONG>$sequence</STRONG> 
+                  <BR>command.<BR><BR><BR><BR>Here are the sub-commands for 
+                  <STRONG>$sequence</STRONG>:<BR><BR><BR><BR>[motion extraction] 
+                  This is to extract out motion from animations such as walking 
+                  <BR>and running. The most common options for this are: X, Y, 
+                  LX, and LY, which are <BR>for movement along the x and y axis. 
+                  LX and LY are for linear movement. I've <BR>found that X and Y 
+                  work equally as well as LX and LY. You can extract from one 
+                  <BR>axis or combine them, and even from the Z axis. This 
+                  motion will be used in <BR>Half-Life to move the 
+                  monster.<BR><BR><BR><BR>[<STRONG>fps</STRONG> &lt;#&gt;] This 
+                  sets the frames per second that the animation <BR>plays at, if 
+                  you want to adjust it here.<BR><BR>example: 
+                  <STRONG>fps</STRONG> 15<BR><BR><BR><BR>[<STRONG>blend</STRONG> 
+                  &lt;axis&gt; &lt;start&gt; &lt;end&gt;] You can list <BR>two 
+                  .smd animations and blend them together. This is useful for 
+                  shooting because <BR>you can animate at two extreme angles and 
+                  the game blends between them to aim <BR>and shoot in the right 
+                  direction. This example blends from -45 to +45 degrees <BR>on 
+                  the X-axis. It seems the angles are very important but the 
+                  axis is almost <BR>arbitrary.<BR><BR>example: 
+                  <STRONG>blend</STRONG> XR -45 
+                  45<BR><BR><BR><BR>[<STRONG>origin</STRONG> &lt;X&gt; &lt;Y&gt; 
+                  &lt;Z&gt;] Same idea as <STRONG>$origin</STRONG> <BR>but only 
+                  applies to this animation.<BR><BR>example: 
+                  <STRONG>origin</STRONG> 0 0 
+                  13<BR><BR><BR><BR>[<STRONG>scale</STRONG> &lt;#&gt;] Same idea 
+                  as <STRONG>$scale</STRONG> but <BR>only applies to this 
+                  animation.<BR><BR>example: <STRONG>scale</STRONG> 
+                  1.3<BR><BR><BR><BR>[<STRONG>loop</STRONG>] Indicates that this 
+                  animation loops.<BR><BR>example: 
+                  <STRONG>loop</STRONG><BR><BR><BR><BR>[<STRONG>frame</STRONG> 
+                  &lt;start&gt; &lt;end&gt;] This limits the frames that <BR>are 
+                  used from the smd file, to make post-editing 
+                  easier.<BR><BR>example: <STRONG>frame</STRONG> 5 
+                  10<BR><BR><BR><BR>[&lt;activity&gt; &lt;multiplier&gt;] 
+                  AI-controlled activities. The game automatically <BR>runs 
+                  these animations without extra code. This example has 
+                  act_range_attack2 <BR>chosen since there are 2 types of range 
+                  attacks, with a multiplier of 3. This <BR>means there can be 
+                  several animations using this activity, and this one will 
+                  <BR>be randomly chosen 3 times more often. Valve's <A 
+                  href="http://articles.thewavelength.net/tutorials/ModelingTutorial.html">Modeling 
+                  <BR>Tutorial</A> has a complete listing of these 
+                  actions.<BR><BR>example: ACT_RANGE_ATTACK2 
+                  3<BR><BR><BR><BR>{<A name=event><STRONG>event</STRONG></A> 
+                  &lt;#&gt; &lt;frame&gt; &lt;options&gt;} <BR>Animation events. 
+                  These vary quite a bit, but are the most fun. Events can call 
+                  <BR>either a sound, sprite, map trigger, or a programming code 
+                  event that can do <BR>whatever you'd like.<BR><BR>example 1: { 
+                  <STRONG>event</STRONG> 5004 1 "weapons\shoot.wav" 
+                  }<BR><BR>Event 5004 plays this sound on frame 1. Include the 
+                  path starting from your <BR>mod folder.<BR><BR><BR><BR>example 
+                  2: { <STRONG>event</STRONG> 5001 1 "20" }<BR><BR>Events 5001, 
+                  5011 and 5021 are for sprites, particularly muzzleflashes for 
+                  weapons. <BR>This example plays the mp5 sprite, 
+                  muzzleflash1.spr on frame 1. "20" <BR>indicates that sprite # 
+                  0 is scaled 2 times larger than normal. Below is a chart 
+                  <BR>of muzzleflash sprites with the number that they are 
+                  assigned to and what they're <BR>used for:</P><BR>
+                  <DIV align=left><BR>
+                  <TABLE width="100%" bgColor=#ffffff border=1><BR>
+                    <TBODY>
+                    <TR><BR>
+                      <TD vAlign=top align=left width="33%"><FONT 
+                        color=#000000>sprite number: <BR>name - 
+use</FONT></TD><BR>
+                      <TD vAlign=top align=left width="33%">&nbsp;</TD><BR>
+                      <TD vAlign=top align=left 
+                    width="33%">&nbsp;</TD><BR></TR><BR>
+                    <TR><BR>
+                      <TD vAlign=top align=left width="33%"><FONT 
+                        color=#000000>0: muzzleflash1.spr <BR>- 
+mp5</FONT></TD><BR>
+                      <TD vAlign=top align=left width="33%"><FONT 
+                        color=#000000>1: muzzleflash2.spr <BR>- shotgun, 
+                        pistols</FONT></TD><BR>
+                      <TD vAlign=top align=left width="33%"><FONT 
+                        color=#000000>2: muzzleflash3.spr <BR>- 
+                      hornetgun</FONT></TD><BR></TR><BR></TBODY></TABLE><BR></DIV><BR>
+                  <P align=left>An <A 
+                  href="http://articles.thewavelength.net/#$attachment">attachment 
+                  point</A> needs to be defined <BR>for these to show up in 
+                  Half-Life. Event 5001 has it's origin at $attachment <BR>0, 
+                  5011's origin is at $attachment 1, and 5021's origin is at 
+                  $attachment 2.<BR><BR><BR><BR>example 3: { 
+                  <STRONG>event</STRONG> 5002 10 "5" }<BR><BR>Event 5002 is for 
+                  sparks. Here it plays on frame 10 and is scaled up 5 times. 
+                  <BR>It's origin is the lowest attachment number, zero, unless 
+                  you don't define zero. <BR>Then it will be at $attachment 
+                  1.<BR><BR><BR><BR>example 4: { <STRONG>event</STRONG> 7 2 
+                  }<BR><BR>This simply plays event # 7 on frame 2. Event 7 can 
+                  be anything. This needs <BR>to be defined in the monster's AI 
+                  code.<BR><BR><BR><BR>example 5: { event 1003 20 "bigexplosion" 
+                  }<BR><BR>Event 1003 actually triggers a sequence to happen in 
+                  a map, this one called <BR>"bigexplosion", on frame 20. These 
+                  are most likely going to be part <BR>of scripted sequences and 
+                  only happen once.<BR><BR><BR><BR>Here are <A 
+                  name="$sequence examples">examples</A> for 
+                  <STRONG>$sequence</STRONG>:<BR><BR><BR><BR>example 1: 
+                  <STRONG>$sequence</STRONG> crouch_shoot_mp5 
+                  "crouch_shoot_mp5"<BR><BR>This is as simple as it gets, and is 
+                  the minimum needed for it to work. crouch_shoot_mp5 <BR>is the 
+                  animation name, and "crouch_shoot_mp5" is the actual animation 
+                  <BR>file, without the .smd extension.<BR><BR><BR><BR>example 
+                  2: <STRONG>$sequence</STRONG> crouch_shoot_mp5 
+                  "crouch_shootdown_mp5" <BR>"crouch_shootup_mp5" 
+                  <STRONG>blend</STRONG> XR -30 40 <STRONG>fps</STRONG> <BR>20 
+                  <STRONG>origin</STRONG> 0 0 18<STRONG> loop</STRONG> 
+                  ACT_RANGE_ATTACK1 2 <BR>{ <STRONG>event</STRONG> 5001 0 "40" 
+                  }<BR><BR>This is how complicated the same animation can get. 
+                  crouch_shoot_mp5 is still <BR>the animation name, but 
+                  "crouch_shootdown_mp5" and "crouch_shootup_mp5" <BR>smd files 
+                  are being blended together to create it. Therefore the 
+                  <STRONG>blend</STRONG> <BR>command is used, with the 
+                  parameters of XR -30 40 to set the X-axis rotation <BR>from 
+                  -30 to +40 degrees. The <STRONG>fps</STRONG> is adjusted to 20 
+                  to slow <BR>it down from the original file's setting of 30. 
+                  Since this is a crouching animation, <BR>the 
+                  <STRONG>origin</STRONG> is lowered to bring the model's feet 
+                  to the ground. <BR>It's a looping animation so the 
+                  <STRONG>loop</STRONG> flag is set, plus this <BR>is a 
+                  range-attack so it's labeled as ACT_RANGE_ATTACK1. It could've 
+                  also been <BR>ACT_RANGE_ATTACK2 since there are two of these 
+                  attacks automatically set up <BR>in code. This activity has a 
+                  multiplier of 2 so if there are others to choose <BR>from, the 
+                  game will randomly choose this one 2 times more often than the 
+                  others. <BR>And finally event 5001, which is a muzzleflash 
+                  sprite, plays on frame 0. "40" <BR>indicates that sprite 
+                  number 0, or muzzleflash1.spr, is scaled 4 times larger 
+                  <BR>than normal.<BR><BR><BR><BR>example 3: 
+                  <STRONG>$sequence</STRONG> shoot "shoot" { { event 5001 <BR>1 
+                  "20" } { event 5004 1 "hks1.wav" } }<BR><BR>This example uses 
+                  <STRONG>events</STRONG> to show a muzzleflash sprite and play 
+                  <BR>a sound for a weapon shooting.<BR><BR><BR><BR><BR><BR>That 
+                  wraps up the <STRONG>$sequence</STRONG> command, and all the 
+                  common commands <BR>for studiomdl. Next are example 
+                  scripts.<BR><BR><BR><BR><BR><BR><STRONG>Example 
+                  Scripts</STRONG><BR><BR>Here are some complete example scripts 
+                  that can be used to get started with. <BR>My comments are in 
+                  red and usually follow the line they refer 
+                  to.<BR><BR><BR><BR><STRONG>Player Models</STRONG></P><BR>
+                  <TABLE cellSpacing=1 cellPadding=2 bgColor=#ffffff 
+                    border=1><BR>
+                    <TBODY>
+                    <TR><BR>
+                      <TD vAlign=top align=left><FONT 
+                        color=#000000>//=====================================================<BR><BR>//&nbsp;&nbsp; 
+                        Dukowski multiplayer 
+                        model<BR><BR>//=====================================================<BR><BR><BR><BR>$modelname 
+                        "C:\Half-Life\valve\models\player\Dukowski\Dukowski.mdl"<BR><BR></FONT><FONT 
+                        color=#ff0000>// This is where the final model is 
+                        compiled <BR>to.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$cd 
+                        "C:\Half-Life\valve\models\player"<BR><BR></FONT><FONT 
+                        color=#ff0000>// This is the root folder where models 
+                        and <BR>animations should go.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$cdtexture 
+                        "C:\Half-Life\valve\models\player\dmatch\Dukowski"<BR><BR></FONT><FONT 
+                        color=#ff0000>// This indicates that the textures are in 
+                        <BR>a separate folder. They don't have to be separate 
+                        though.</FONT><FONT<BR /> 
+                        color="#000000"&gt;<BR><BR><BR><BR>$cliptotextures<BR><BR></FONT><FONT 
+                        color=#ff0000>// $cliptotextures tells studiomdl to 
+                        compile <BR>the textures in with the 
+                        model.</FONT><BR><FONT color=#000000><BR><BR>$scale 
+                        1.0<BR><BR></FONT><FONT color=#ff0000>// Scale is kept 
+                        at 1:1 from the original model.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$origin 0 0 
+                        36<BR><BR></FONT><FONT color=#ff0000>// Multiplayer 
+                        models' origins need to be this <BR>so their feet are on 
+                        the ground.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$bodygroup 
+                        body<BR><BR>{<BR><BR>studio 
+                        "..\dmatch\Dukowski\Dukowski"<BR><BR></FONT><FONT 
+                        color=#ff0000>// This is the reference model. A high and 
+                        <BR>low res version of the model can go 
+                        here.</FONT><FONT 
+                        color=#000000><BR><BR>}<BR><BR><BR><BR></FONT><FONT 
+                        color=#ff0000>// Rename Character Studio R2 bones, if 
+                        there <BR>are any.</FONT><FONT 
+                        color=#000000><BR><BR>$renamebone "Bip01 L Thigh" "Bip01 
+                        L Leg"<BR><BR>$renamebone "Bip01 L Calf" "Bip01 L 
+                        Leg1"<BR><BR>$renamebone "Bip01 R Thigh" "Bip01 R 
+                        Leg"<BR><BR>$renamebone "Bip01 R Calf" "Bip01 R 
+                        Leg1"<BR><BR>$renamebone "Bip01 L Clavicle" "Bip01 L 
+                        Arm"<BR><BR>$renamebone "Bip01 L UpperArm" "Bip01 L 
+                        Arm1"<BR><BR>$renamebone "Bip01 L Forearm" "Bip01 L 
+                        Arm2"<BR><BR>$renamebone "Bip01 R Clavicle" "Bip01 R 
+                        Arm"<BR><BR>$renamebone "Bip01 R UpperArm" "Bip01 R 
+                        Arm1"<BR><BR>$renamebone "Bip01 R Forearm" "Bip01 R 
+                        Arm2"<BR><BR><BR><BR>// make attachment points for 
+                        muzzleflash effects<BR><BR></FONT><FONT color=#ff0000>// 
+                        These attachment coordinates have an X 1 <BR>after them. 
+                        I assume they're for axis and direction, but I 
+                        haven't<BR><BR>// found that changing these make a 
+                        difference.</FONT><FONT 
+                        color=#000000><BR><BR>$attachment 0 "Bip01 R Hand" 20 2 
+                        5 X 1<BR><BR>$attachment 1 "Bip01 R Hand" 15 1.5 3.75 X 
+                        1<BR><BR>$attachment 2 "Bip01 R Hand" 30 3 7.5 X 
+                        1<BR><BR><BR><BR>// add backbone<BR><BR></FONT><FONT 
+                        color=#ff0000>// Multiplayer models' spine is controlled 
+                        <BR>by the game to have that famous pelvis 
+                        twist.</FONT><FONT color=#000000><BR><BR>$controller 0 
+                        "Bip01 Spine" XR -30 30<BR><BR>$controller 1 "Bip01 
+                        Spine1" XR -30 30<BR><BR>$controller 2 "Bip01 Spine2" XR 
+                        -30 30<BR><BR>$controller 3 "Bip01 Spine3" XR -30 
+                        30<BR><BR><BR><BR>// hitboxes<BR><BR></FONT><FONT 
+                        color=#ff0000>// For multiplayer models, hitboxes are 
+                        defined <BR>in the player.mdl that is on the server, not 
+                        in custom ones chosen<BR><BR>// by a client. Therefore 
+                        unless you're making a server player model, you 
+                        <BR>probably don't need these hitboxes.</FONT><FONT 
+                        color=#000000><BR><BR>$hbox 3 "Bip01 Pelvis" -4.69 -4.44 
+                        -6.75 4.00 5.56 6.75<BR><BR>$hbox 6 "Bip01 L Leg" 2.66 
+                        -3.69 -3.09 18.16 4.88 3.31<BR><BR>$hbox 6 "Bip01 L 
+                        Leg1" 0.38 -3.97 -2.84 17.60 4.00 2.94<BR><BR>$hbox 6 
+                        "Bip01 L Foot" -0.59 -2.34 -2.63 3.79 8.00 
+                        2.19<BR><BR>$hbox 7 "Bip01 R Leg" 2.47 -3.69 -3.16 18.13 
+                        4.88 3.38<BR><BR>$hbox 7 "Bip01 R Leg1" 0.31 -3.97 -2.84 
+                        17.60 3.94 2.97<BR><BR>$hbox 7 "Bip01 R Foot" -0.56 
+                        -2.34 -2.19 3.81 8.00 2.66<BR><BR>$hbox 3 "Bip01 Spine1" 
+                        -3.25 -5.50 -5.50 4.83 5.50 5.50<BR><BR>$hbox 2 "Bip01 
+                        Spine2" -0.06 -5.53 -7.59 8.00 7.00 7.59<BR><BR>$hbox 2 
+                        "Bip01 Spine3" -2.25 -6.81 -6.31 6.50 5.09 
+                        6.31<BR><BR>$hbox 2 "Bip01 Neck" -3.11 -1.50 -3.00 2.05 
+                        3.50 3.00<BR><BR>$hbox 1 "Bip01 Head" 0.09 -3.66 -3.00 
+                        8.41 5.09 3.00<BR><BR>$hbox 4 "Bip01 L Arm" 0.94 -2.88 
+                        -4.13 5.44 4.28 3.50<BR><BR>$hbox 4 "Bip01 L Arm1" -2.16 
+                        -2.34 -2.56 11.56 3.41 2.38<BR><BR>$hbox 4 "Bip01 L 
+                        Arm2" 0.59 -1.81 -2.19 10.75 2.84 2.41<BR><BR>$hbox 4 
+                        "Bip01 L Hand" 0.00 -1.00 -2.00 3.00 1.50 
+                        3.50<BR><BR>$hbox 5 "Bip01 R Arm" 1.38 -2.84 -3.56 5.69 
+                        4.31 4.31<BR><BR>$hbox 5 "Bip01 R Arm1" -1.88 -2.47 
+                        -2.16 11.81 3.28 2.81<BR><BR>$hbox 5 "Bip01 R Arm2" 0.44 
+                        -1.97 -2.34 10.59 2.72 2.22<BR><BR>$hbox 5 "Bip01 R 
+                        Hand" 0.00 -1.00 -2.00 3.00 1.50 3.50<BR><BR><BR><BR>// 
+                        standard animations<BR><BR>$sequence look_idle 
+                        "new_idle2" loop fps 14 ACT_IDLE 2<BR><BR>$sequence idle 
+                        "new_idle" loop fps 14 ACT_IDLE 1<BR><BR>$sequence 
+                        deep_idle "new_idle3" loop fps 12 ACT_IDLE 
+                        4<BR><BR></FONT><FONT color=#ff0000>// Here are three 
+                        idle animations, all called <BR>ACT_IDLE. The game can 
+                        randomly pick one to play based<BR><BR>// on it's 
+                        multiplier. deep_idle will be chosen 4 times more than 
+                        the others.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$sequence run2 "new_run" 
+                        LX loop fps 40 ACT_RUN 1<BR><BR></FONT><FONT 
+                        color=#ff0000>// LX is used to extract out the forward 
+                        motion <BR>on the X-axis.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$sequence walk2handed 
+                        "new_walk" LX loop fps 26 ACT_WALK 1<BR><BR>$sequence 
+                        2handshoot "shoot_2handed" fps 20 ACT_RANGE_ATTACK1 
+                        <BR>1<BR><BR>$sequence crawl "crouch_moveforward" LX 
+                        loop fps 22 ACT_CROUCH <BR>1 origin 0 0 
+                        18<BR><BR></FONT><FONT color=#ff0000>// The origin is 
+                        changed just for this animation.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$sequence crouch_idle 
+                        "crouch_idle" loop fps 12 ACT_CROUCHIDLE <BR>1 origin 0 
+                        0 18 rotate 8<BR><BR></FONT><FONT color=#ff0000>// The 
+                        <STRONG>rotate</STRONG> command is used <BR>rarely. It's 
+                        parameters are simply: rotate &lt;angle&gt;. It's used 
+                        to rotate <BR>your model<BR><BR>// on the Z-axis from 
+                        here, instead of having to go back and reanimate 
+                        it.</FONT><FONT color=#000000><BR><BR><BR><BR>$sequence 
+                        jump "player_jump" fps 30 ACT_HOP 1<BR><BR>$sequence 
+                        long_jump "player_longjump" LX fps 24 ACT_LEAP 
+                        1<BR><BR>$sequence swim "player_swim" loop fps 14 
+                        ACT_SWIM 1 origin 0 0 <BR>0<BR><BR>$sequence treadwater 
+                        "player_treadwater" loop fps 14 ACT_HOVER 
+                        <BR>1<BR><BR>$sequence run "ref_run" LX loop fps 
+                        31<BR><BR>$sequence walk "ref_walk" LX loop fps 
+                        31<BR><BR>$sequence aim_2 "ref_aimdown_twohanded" 
+                        "ref_aimup_twohanded" <BR>loop fps 14 blend XR -45 
+                        45<BR><BR></FONT><FONT color=#ff0000>// The 
+                        <STRONG>blend</STRONG> command is used <BR>to combine 
+                        these two animations. They are aiming down and up and 
+                        the game<BR><BR>// can blend the two angles to come up 
+                        with any angle in between.<BR><BR></FONT><FONT 
+                        color=#000000><BR><BR>$sequence shoot_2 
+                        "ref_shootdown_twohanded" "ref_shootup_twohanded" 
+                        <BR>loop fps 14 blend XR -45 45<BR><BR>$sequence aim_1 
+                        "ref_aimdown_onehanded" "ref_aimup_onehanded" <BR>loop 
+                        fps 14 blend XR -45 45<BR><BR>$sequence shoot_1 
+                        "ref_shootdown_onehanded" "ref_shootup_onehanded" 
+                        <BR>loop fps 14 blend XR -45 45<BR><BR><BR><BR>//death 
+                        animations<BR><BR>$sequence die_simple "die_simple" fps 
+                        22 ACT_DIESIMPLE 1 { event <BR>2001 10 
+                        }<BR><BR></FONT><FONT color=#ff0000>// Event 2001 is 
+                        played on frame 10. This is <BR>a code event that makes 
+                        the player dead.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$sequence die_backwards1 
+                        "die_backward" fps 26 ACT_DIEBACKWARD <BR>4 { event 2001 
+                        14 }<BR><BR>$sequence die_backwards "player_die2" fps 30 
+                        ACT_DIEBACKWARD 1 <BR>{ event 2001 15 }<BR><BR>$sequence 
+                        die_forwards "player_die1" fps 26 ACT_DIEFORWARD 1 { 
+                        <BR>event 2001 9 }<BR><BR>$sequence headshot 
+                        "die_headshot" fps 24 ACT_DIE_HEADSHOT 4 { <BR>event 
+                        2001 23 }<BR><BR>$sequence die_spin "player_die3" fps 30 
+                        ACT_DIE_HEADSHOT 1 { event <BR>2001 16 
+                        }<BR><BR>$sequence gutshot "die_gutshot" fps 26 
+                        ACT_DIE_GUTSHOT 1 { event <BR>2001 23 
+                        }<BR><BR><BR><BR>// weapons animations<BR><BR>// 
+                        crowbar, grenade<BR><BR>$sequence ref_aim_crowbar 
+                        "ref_aimdown_crowbar" "ref_aimup_crowbar" <BR>blend XR 
+                        -45 45 fps 12 LOOP<BR><BR>$sequence ref_shoot_crowbar 
+                        "ref_swingdown_crowbar" "ref_swingup_crowbar" <BR>blend 
+                        XR -45 45 fps 24<BR><BR>$sequence crouch_aim_crowbar 
+                        "crouch_aimdown_crowbar" "crouch_aimup_crowbar" 
+                        <BR>blend XR -45 45 fps 12 LOOP origin 0 0 
+                        18<BR><BR>$sequence crouch_shoot_crowbar 
+                        "crouch_swingdown_crowbar" "crouch_swingup_crowbar" 
+                        <BR>blend XR -45 45 fps 24 origin 0 0 18<BR><BR>// 
+                        tipmines, satchel<BR><BR>$sequence ref_aim_trip 
+                        "ref_aimdown_trip" "ref_aimup_trip" <BR>blend XR -45 45 
+                        fps 12 LOOP<BR><BR>$sequence ref_shoot_trip 
+                        "ref_placedown_trip" "ref_placeup_trip" <BR>blend XR -45 
+                        45 fps 18<BR><BR>$sequence crouch_aim_trip 
+                        "crouch_aimdown_trip" "crouch_aimup_trip" <BR>blend XR 
+                        -45 45 fps 12 LOOP origin 0 0 18<BR><BR>$sequence 
+                        crouch_shoot_trip "crouch_placedown_trip" 
+                        "crouch_placeup_trip" <BR>blend XR -45 45 fps 16 origin 
+                        0 0 18<BR><BR>// 9mm<BR><BR>$sequence ref_aim_onehanded 
+                        "ref_aimdown_onehanded" "ref_aimup_onehanded" <BR>blend 
+                        XR -50 35 fps 12 LOOP <BR><BR>$sequence 
+                        ref_shoot_onehanded "ref_shootdown_onehanded" 
+                        "ref_shootup_onehanded" <BR>blend XR -50 35 fps 16 { 
+                        event 5011 0 "21" }<BR><BR>$sequence 
+                        crouch_aim_onehanded "crouch_aimdown_onehanded" 
+                        "crouch_aimup_onehanded" <BR>blend XR -50 35 fps 12 LOOP 
+                        origin 0 0 18<BR><BR>$sequence crouch_shoot_onehanded 
+                        "crouch_shootdown_onehanded" 
+                        <BR>"crouch_shootup_onehanded" blend XR -50 35 fps 16 { 
+                        event 5011 <BR>0 "21" } origin 0 0 
+                        18<BR><BR></FONT><FONT color=#ff0000>// Event 5011 is 
+                        played on frame 0, using sprite <BR>"21". This is 
+                        muzzleflash2.spr scaled up 2 times.<BR><BR>// 5011 is 
+                        similar to 5001, but has it's origin at $attachment 
+                        1.</FONT><FONT<BR /> 
+                        color="#000000"&gt;<BR><BR><BR><BR>// 
+                        python<BR><BR>$sequence ref_aim_python 
+                        "ref_aimdown_onehanded" "ref_aimup_onehanded" <BR>blend 
+                        XR -50 35 fps 12 LOOP <BR><BR>$sequence ref_shoot_python 
+                        "ref_shootdown_python" "ref_shootup_python" <BR>blend XR 
+                        -50 35 fps 16 { event 5011 0 "31" }<BR><BR>$sequence 
+                        crouch_aim_python "crouch_aimdown_onehanded" 
+                        "crouch_aimup_onehanded" <BR>blend XR -50 35 fps 12 LOOP 
+                        origin 0 0 18<BR><BR>$sequence crouch_shoot_python 
+                        "crouch_shootdown_python" "crouch_shootup_python" 
+                        <BR>blend XR -50 35 fps 16 { event 5011 0 "31" } origin 
+                        0 0 18<BR><BR>// shotgun<BR><BR>$sequence 
+                        ref_aim_shotgun "ref_aimdown_shotgun" 
+                        "ref_aimup_shotgun" <BR>blend XR -45 45 fps 12 
+                        LOOP<BR><BR>$sequence ref_shoot_shotgun 
+                        "ref_shootdown_shotgun" "ref_shootup_shotgun" <BR>blend 
+                        XR -45 45 fps 15 { event 5021 0 "51" }<BR><BR>$sequence 
+                        crouch_aim_shotgun "crouch_aimdown_shotgun" 
+                        "crouch_aimup_shotgun" <BR>blend XR -45 45 fps 12 LOOP 
+                        origin 0 0 18<BR><BR>$sequence crouch_shoot_shotgun 
+                        "crouch_shootdown_shotgun" "crouch_shootup_shotgun" 
+                        <BR>blend XR -45 45 fps 15 { event 5021 0 "51" } origin 
+                        0 0 18<BR><BR></FONT><FONT color=#ff0000>// Event 5021 
+                        is played on frame 0, using sprite <BR>"51". This is 
+                        muzzleflash2.spr scaled up 5 times.<BR><BR>// 5021 has 
+                        it's origin at $attachment 2.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>// gauss<BR><BR>$sequence 
+                        ref_aim_gauss "ref_aimdown_guass" "ref_aimup_guass" 
+                        <BR>blend XR -45 45 fps 12 LOOP<BR><BR>$sequence 
+                        ref_shoot_gauss "ref_shootdown_guass" 
+                        "ref_shootup_guass" <BR>blend XR -45 45 fps 
+                        15<BR><BR>$sequence crouch_aim_gauss 
+                        "crouch_aimdown_guass" "crouch_aimup_guass" <BR>blend XR 
+                        -45 45 fps 12 LOOP origin 0 0 18<BR><BR>$sequence 
+                        crouch_shoot_gauss "crouch_shootdown_guass" 
+                        "crouch_shootup_guass" <BR>blend XR -45 45 fps 15 origin 
+                        0 0 18<BR><BR>// mp5<BR><BR>$sequence ref_aim_mp5 
+                        "ref_aimdown_mp5" "ref_aimup_mp5" <BR>blend XR -45 45 
+                        fps 12 LOOP<BR><BR>$sequence ref_shoot_mp5 
+                        "ref_shootdown_mp5" "ref_shootup_mp5" <BR>blend XR -45 
+                        45 fps 20 LOOP { event 5001 0 "40" }<BR><BR>$sequence 
+                        crouch_aim_mp5 "crouch_aimdown_mp5" "crouch_aimup_mp5" 
+                        <BR>blend XR -30 40 fps 12 LOOP origin 0 0 
+                        18<BR><BR>$sequence crouch_shoot_mp5 
+                        "crouch_shootdown_mp5" "crouch_shootup_mp5" <BR>blend XR 
+                        -30 40 fps 20 LOOP { event 5001 0 "40" } origin 0 0 
+                        18<BR><BR></FONT><FONT color=#ff0000>// Event 5001 is 
+                        played on frame 0, using sprite <BR>"40". This is 
+                        muzzleflash1.spr scaled up 4 times.<BR><BR>// 5001 has 
+                        it's origin at $attachment 0.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>// rpg<BR><BR>$sequence 
+                        ref_aim_rpg "ref_aimdown_rpg" "ref_aimup_rpg" <BR>blend 
+                        XR -45 40 fps 12 LOOP<BR><BR>$sequence ref_shoot_rpg 
+                        "ref_shootdown_rpg" "ref_shootup_rpg" <BR>blend XR -45 
+                        40 fps 18<BR><BR>$sequence crouch_aim_rpg 
+                        "crouch_aimdown_rpg" "crouch_aimup_rpg" <BR>blend XR -45 
+                        40 fps 12 LOOP origin 0 0 18<BR><BR>$sequence 
+                        crouch_shoot_rpg "crouch_shootdown_rpg" 
+                        "crouch_shootup_rpg" <BR>blend XR -45 40 fps 18 origin 0 
+                        0 18<BR><BR>// egon<BR><BR>$sequence ref_aim_egon 
+                        "ref_aimdown_egon" "ref_aimup_egon" <BR>blend XR -45 35 
+                        fps 12 LOOP<BR><BR>$sequence ref_shoot_egon 
+                        "ref_aimdown_egon" "ref_aimup_egon" <BR>blend XR -45 35 
+                        fps 18 LOOP<BR><BR>$sequence crouch_aim_egon 
+                        "crouch_aimdown_egon" "crouch_aimup_egon" <BR>blend XR 
+                        -45 45 fps 12 LOOP origin 0 0 18<BR><BR>$sequence 
+                        crouch_shoot_egon "crouch_aimdown_egon" 
+                        "crouch_aimup_egon" <BR>blend XR -45 45 fps 18 LOOP 
+                        origin 0 0 18<BR><BR>// squeak<BR><BR>$sequence 
+                        ref_aim_squeak "ref_aimdown_squeak" "ref_aimup_squeak" 
+                        <BR>blend XR -45 45 fps 12 LOOP<BR><BR>$sequence 
+                        ref_shoot_squeak "ref_shootdown_squeak" 
+                        "ref_shootup_squeak" <BR>blend XR -45 45 fps 
+                        14<BR><BR>$sequence crouch_aim_squeak 
+                        "crouch_aimdown_squeak" "crouch_aimup_squeak" <BR>blend 
+                        XR -45 45 fps 12 LOOP origin 0 0 18<BR><BR>$sequence 
+                        crouch_shoot_squeak "crouch_shootdown_squeak" 
+                        "crouch_shootup_squeak" <BR>blend XR -45 45 fps 14 
+                        origin 0 0 18<BR><BR>// hive<BR><BR>$sequence 
+                        ref_aim_hive "ref_aimdown_hive" "ref_aimup_hive" 
+                        <BR>blend XR -45 45 fps 12 LOOP<BR><BR>$sequence 
+                        ref_shoot_hive "ref_shootdown_hive" "ref_shootup_hive" 
+                        <BR>blend XR -45 45 fps 15<BR><BR>$sequence 
+                        crouch_aim_hive "crouch_aimdown_hive" 
+                        "crouch_aimup_hive" <BR>blend XR -45 45 fps 12 LOOP 
+                        origin 0 0 18<BR><BR>$sequence crouch_shoot_hive 
+                        "crouch_shootdown_hive" "crouch_shootup_hive" <BR>blend 
+                        XR -45 45 fps 15 origin 0 0 18<BR><BR>// 
+                        crossbow<BR><BR>$sequence ref_aim_bow "ref_aimdown_bow" 
+                        "ref_aimup_bow" <BR>blend XR -45 45 fps 12 
+                        LOOP<BR><BR>$sequence ref_shoot_bow "ref_aimdown_bow" 
+                        "ref_aimup_bow" <BR>blend XR -45 45 fps 
+                        16<BR><BR>$sequence crouch_aim_bow "crouch_aimdown_bow" 
+                        "crouch_aimup_bow" <BR>blend XR -45 45 fps 12 LOOP 
+                        origin 0 0 18<BR><BR>$sequence crouch_shoot_bow 
+                        "crouch_aimdown_bow" "crouch_aimup_bow" <BR>blend XR -45 
+                        45 fps 16 origin 0 0 18<BR><BR><BR><BR>// dead model 
+                        poses<BR><BR>$origin 0 0 0<BR><BR>$sequence deadback 
+                        "dead_pose_back" fps 10 <BR><BR>$sequence deadsitting 
+                        "dead_pose_sitting" fps 10 <BR><BR>$sequence deadstomach 
+                        "dead_pose_stomach" fps 10 <BR><BR>$sequence deadtable 
+                        "dead_pose_table" fps 
+                  10</FONT></TD><BR></TR><BR></TBODY></TABLE><BR>
+                  <P 
+                  align=left><BR><BR><BR><BR><BR><BR><STRONG>Weapons</STRONG></P><BR>
+                  <TABLE cellSpacing=1 cellPadding=2 bgColor=#ffffff 
+                    border=1><BR>
+                    <TBODY>
+                    <TR><BR>
+                      <TD vAlign=top align=left><FONT color=#000000>// 
+                        w_9mmAR.qc<BR><BR></FONT><FONT color=#ff0000>// mp5 
+                        world model - uses same reference model <BR>as 
+                        p_9mmAR.mdl</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$scale 
+                        1.3<BR><BR></FONT><FONT color=#ff0000>// Scale is a 
+                        little larger for world models.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$modelname 
+                        "C:\Half-Life\valve\models\w_9mmAR.mdl"<BR><BR></FONT><FONT 
+                        color=#ff0000>// This is where the final model is 
+                        compiled <BR>to.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$cd 
+                        "C:\Half-Life\valve\models\world_mp5"<BR><BR></FONT><FONT 
+                        color=#ff0000>// This is the root folder where models 
+                        and <BR>animations should go.</FONT><BR><FONT 
+                        color=#000000><BR><BR>$externaltextures<BR><BR></FONT><FONT 
+                        color=#ff0000>// Only world models have external 
+                        textures.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$body studio 
+                        "world_mp5"<BR><BR></FONT><FONT color=#ff0000>// This is 
+                        the reference model.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$sequence idle "world_mp5" 
+                        fps 10<BR><BR></FONT><FONT color=#ff0000>// This is the 
+                        reference model used for an <BR>idle animation, since 
+                        world models don't 
+                  animate.</FONT></TD><BR></TR><BR></TBODY></TABLE><BR>
+                  <P align=left><BR><BR></P><BR>
+                  <TABLE cellSpacing=1 cellPadding=2 bgColor=#ffffff 
+                    border=1><BR>
+                    <TBODY>
+                    <TR><BR>
+                      <TD vAlign=top align=left><FONT color=#000000>// 
+                        p_9mmAR.qc<BR><BR></FONT><FONT color=#ff0000>// mp5 
+                        player model - uses same reference model <BR>as 
+                        w_9mmAR.mdl</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$scale 
+                        1.0<BR><BR></FONT><FONT color=#ff0000>// Scale is kept 
+                        at 1:1 from the original model.</FONT><BR><BR><FONT 
+                        color=#000000><BR><BR>$modelname 
+                        "C:\Half-Life\valve\models\p_9mmAR.mdl"<BR><BR></FONT><FONT 
+                        color=#ff0000>// This is where the final model is 
+                        compiled <BR>to.</FONT><BR><FONT 
+                        color=#000000><BR><BR>$cd 
+                        "C:\Half-Life\valve\models\world_mp5"<BR><BR></FONT><FONT 
+                        color=#ff0000>// This is the root folder where models 
+                        and <BR>animations should go.</FONT><BR><BR><FONT 
+                        color=#000000>$cliptotextures<BR><BR></FONT><FONT 
+                        color=#ff0000>// $cliptotextures tells studiomdl to 
+                        compile <BR>the textures in with the 
+                        model.</FONT><BR><FONT color=#000000><BR><BR>$body 
+                        studio "world_mp5"<BR><BR></FONT><FONT color=#ff0000>// 
+                        This is the reference model.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$sequence idle "world_mp5" 
+                        fps 10<BR><BR></FONT><FONT color=#ff0000>// This is the 
+                        reference model used for an <BR>idle animation, since 
+                        player models don't 
+                  animate.</FONT></TD><BR></TR><BR></TBODY></TABLE><BR>
+                  <P align=left><BR><BR></P><BR>
+                  <TABLE cellSpacing=1 cellPadding=2 bgColor=#ffffff 
+                    border=1><BR>
+                    <TBODY>
+                    <TR><BR>
+                      <TD vAlign=top align=left><FONT color=#000000>// 
+                        v_9mmAR.qc<BR><BR>// mp5 
+                        viewmodel<BR><BR><BR><BR>$modelname 
+                        "C:\Half-Life\valve\models\v_9mmAR.mdl"<BR><BR></FONT><FONT 
+                        color=#ff0000>// This is where the final model is 
+                        compiled <BR>to.</FONT><BR><FONT 
+                        color=#000000><BR><BR>$cd 
+                        "C:\Half-Life\valve\models\v_mp5"<BR><BR></FONT><FONT 
+                        color=#ff0000>// This is the root folder where models 
+                        and <BR>animations should go.</FONT><BR><FONT 
+                        color=#000000><BR><BR>$cliptotextures<BR><BR></FONT><FONT 
+                        color=#ff0000>// $cliptotextures tells studiomdl to 
+                        compile <BR>the textures in with the 
+                        model.</FONT><BR><FONT color=#000000><BR><BR>$scale 
+                        1.0<BR><BR></FONT><FONT color=#ff0000>// Scale is kept 
+                        at 1:1 from the original model.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$origin 2 10 
+                        8<BR><BR></FONT><FONT color=#ff0000>// The origin is 
+                        adjusted a little here.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$body studio 
+                        "mp5sd"<BR><BR></FONT><FONT color=#ff0000>// This is the 
+                        reference model.</FONT><BR><BR><FONT 
+                        color=#000000><BR><BR>$attachment 0 "Bone09" -14 1 -0.5 
+                        X -1<BR><BR></FONT><FONT color=#ff0000>// This 
+                        attachment point is for the muzzleflash 
+                        <BR>sprite.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$sequence longidle 
+                        "long_idle" fps 8<BR><BR>$sequence idle1 "idle1" fps 
+                        35<BR><BR>$sequence grenade "grenadeshoot" fps 
+                        30<BR><BR><BR><BR>$sequence reload "reload" fps 30 
+                        {<BR><BR>{ event 5004 5 "mp5/cliprelease1.wav" } 
+                        <BR><BR>{ event 5004 25 "mp5/clipinsert1.wav" 
+                        }<BR><BR>}<BR><BR></FONT><FONT color=#ff0000>// There 
+                        are two sound files played. Event <BR>5004 plays 
+                        cliprelease1.wav on frame 5<BR><BR>// and 
+                        clipinsert1.wav on frame 25.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$sequence deploy "deploy" 
+                        frame 4 15 fps 12<BR><BR></FONT><FONT color=#ff0000>// 
+                        The <STRONG>frame</STRONG> command limits <BR>this 
+                        original animation to only frames 4 to 15.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$sequence shoot "shoot1" 
+                        fps 10 { event 5001 0 "20" <BR>}<BR><BR>$sequence shoot 
+                        "shoot2" fps 10 { event 5001 0 "20" 
+                        <BR>}<BR><BR>$sequence shoot "shoot3" fps 10 { event 
+                        5001 0 "20" <BR>}<BR><BR></FONT><FONT color=#ff0000>// 
+                        Here are the muzzleflash sprites for the <BR>shooting 
+                        animations. Event 5001 is played on frame 0,<BR><BR>// 
+                        using sprite "20". This is muzzleflash1.spr scaled up 2 
+                        times. <BR>Event 5001's origin is $attachment 
+                      0.</FONT></TD><BR></TR><BR></TBODY></TABLE><BR>
+                  <P 
+                  align=left><BR><BR><BR><BR><BR><BR><STRONG>Items</STRONG></P><BR>
+                  <TABLE cellSpacing=1 cellPadding=2 bgColor=#ffffff 
+                    border=1><BR>
+                    <TBODY>
+                    <TR><BR>
+                      <TD vAlign=top align=left><FONT color=#000000>// 
+                        flag.qc<BR><BR></FONT><FONT color=#ff0000>// This is 
+                        just like a CTF flag. Two different <BR>skins can be 
+                        chosen.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$modelname 
+                        "C:\Half-Life\valve\flag.mdl"<BR><BR></FONT><FONT 
+                        color=#ff0000>// This is where the final model is 
+                        compiled <BR>to.</FONT><BR><FONT 
+                        color=#000000><BR><BR>$cd 
+                        "C:\Half-Life\valve\models\source\flag"<BR><BR></FONT><FONT 
+                        color=#ff0000>// This is the root folder where models 
+                        and <BR>animations should go.</FONT><BR><FONT 
+                        color=#000000><BR><BR>$scale 1.0<BR><BR></FONT><FONT 
+                        color=#ff0000>// Scale is the same as the original 
+                        model.</FONT><BR><BR><BR><FONT color=#000000>$body 
+                        studio "flag"<BR><BR></FONT><FONT color=#ff0000>// This 
+                        is the reference model. There only <BR>needs to be one 
+                        since<BR><BR>// we're swapping skins to get the 
+                        appropriate flag.</FONT><FONT<BR /> 
+                        color="#000000"&gt;<BR><BR></FONT><FONT 
+                        color=#ff0000><BR><BR>// A texturegroup is defined for 
+                        different colored flags.</FONT><FONT<BR /> 
+                        color="#000000"&gt;<BR><BR>$texturegroup 
+                        skins<BR><BR>{<BR><BR>{ "red.bmp" }<BR><BR>{ "blue.bmp" 
+                        }<BR><BR>}<BR><BR><BR><BR>$sequence idle "flagwave" fps 
+                        10</FONT></TD><BR></TR><BR></TBODY></TABLE><BR>
+                  <P 
+                  align=left><BR><BR><BR><BR><BR><BR><STRONG>Monsters</STRONG></P><BR>
+                  <TABLE cellSpacing=1 cellPadding=2 bgColor=#ffffff 
+                    border=1><BR>
+                    <TBODY>
+                    <TR><BR>
+                      <TD vAlign=top align=left><FONT color=#000000>$modelname 
+                        "C:\Half-Life\valve\models\monster.mdl"<BR><BR></FONT><FONT 
+                        color=#ff0000>// This is where the final model is 
+                        compiled <BR>to.</FONT><BR><FONT 
+                        color=#000000><BR><BR>$cd 
+                        "C:\Half-Life\valve\models\source\monster"<BR><BR></FONT><FONT 
+                        color=#ff0000>// This is the root folder where models 
+                        and <BR>animations should go.</FONT><BR><FONT 
+                        color=#000000><BR><BR>$externaltextures<BR><BR></FONT><FONT 
+                        color=#ff0000>// $externaltextures tells studiomdl to 
+                        save <BR>skin textures as a separate *t.mdl 
+                        file.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$sequencegroupsize 
+                        64<BR><BR></FONT><FONT color=#ff0000>// 
+                        $sequencegroupsize saves the animations <BR>into 64K 
+                        files.</FONT><FONT color=#000000><BR><BR><BR><BR>$scale 
+                        1.1<BR><BR></FONT><FONT color=#ff0000>// Scale is a 
+                        little larger than the original 
+                        <BR>model.</FONT><BR><FONT 
+                        color=#000000><BR><BR>$eyeposition 0 0 
+                        70<BR><BR></FONT><FONT color=#ff0000>// $eyeposition 
+                        tells the game where the eyes <BR>are in reference to 
+                        the origin.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$attachment 0 "Bip01 R 
+                        Hand" 15 3.5 5<BR><BR>$controller 0 "Bip01 Head" XR -40 
+                        40<BR><BR>$controller mouth "Bone03" ZR 0 
+                        45<BR><BR></FONT><FONT color=#ff0000>// There is an 
+                        attachment for the muzzleflash <BR>sprite, plus a 
+                        controller to move the head<BR><BR>// and a controller 
+                        to move the mouth.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$body studio 
+                        "monster"<BR><BR></FONT><FONT color=#ff0000>// This is 
+                        the reference model.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR></FONT><FONT 
+                        color=#ff0000>// A bodygroup is defined so this monster 
+                        can <BR>hold a pistol and also have it 
+                        holstered.</FONT><FONT color=#000000><BR><BR>$bodygroup 
+                        weapon<BR><BR>{<BR><BR>studio 
+                        "pistol"<BR><BR>blank<BR><BR>}<BR><BR><BR><BR></FONT><FONT 
+                        color=#ff0000>// A texturegroup is defined so this 
+                        monster <BR>can have pain skins.</FONT><FONT 
+                        color=#000000><BR><BR>$texturegroup 
+                        pain<BR><BR>{<BR><BR>{ "body_normal.bmp" 
+                        "head_normal.bmp" }<BR><BR>{ "body_pain.bmp" 
+                        "head_pain.bmp" }<BR><BR>}<BR><BR><BR><BR></FONT><FONT 
+                        color=#ff0000>// Hitboxes divide these bones into 
+                        groups, <BR>and give the coordinates for each 
+                        box.</FONT><FONT color=#000000><BR><BR>$hbox 3 "Bip01 
+                        Pelvis" -4.69 -4.44 -6.75 4.00 5.56 6.75<BR><BR>$hbox 6 
+                        "Bip01 L Leg" 2.66 -3.69 -3.09 18.16 4.88 
+                        3.31<BR><BR>$hbox 6 "Bip01 L Leg1" 0.38 -3.97 -2.84 
+                        17.60 4.00 2.94<BR><BR>$hbox 6 "Bip01 L Foot" -0.59 
+                        -2.34 -2.63 3.79 8.00 2.19<BR><BR>$hbox 7 "Bip01 R Leg" 
+                        2.47 -3.69 -3.16 18.13 4.88 3.38<BR><BR>$hbox 7 "Bip01 R 
+                        Leg1" 0.31 -3.97 -2.84 17.60 3.94 2.97<BR><BR>$hbox 7 
+                        "Bip01 R Foot" -0.56 -2.34 -2.19 3.81 8.00 
+                        2.66<BR><BR>$hbox 3 "Bip01 Spine1" -3.25 -5.50 -5.50 
+                        4.83 5.50 5.50<BR><BR>$hbox 2 "Bip01 Spine2" -0.06 -5.53 
+                        -7.59 8.00 7.00 7.59<BR><BR>$hbox 2 "Bip01 Spine3" -2.25 
+                        -6.81 -6.31 6.50 5.09 6.31<BR><BR>$hbox 2 "Bip01 Neck" 
+                        -3.11 -1.50 -3.00 2.05 3.50 3.00<BR><BR>$hbox 1 "Bip01 
+                        Head" 0.09 -3.66 -3.00 8.41 5.09 3.00 </FONT><FONT<BR 
+                        />color="#FF0000"&gt;// The head is always 1</FONT><FONT 
+                        color=#000000>.<BR><BR>$hbox 4 "Bip01 L Arm" 0.94 -2.88 
+                        -4.13 5.44 4.28 3.50<BR><BR>$hbox 4 "Bip01 L Arm1" -2.16 
+                        -2.34 -2.56 11.56 3.41 2.38<BR><BR>$hbox 4 "Bip01 L 
+                        Arm2" 0.59 -1.81 -2.19 10.75 2.84 2.41<BR><BR>$hbox 4 
+                        "Bip01 L Hand" 0.00 -1.00 -2.00 3.00 1.50 
+                        3.50<BR><BR>$hbox 5 "Bip01 R Arm" 1.38 -2.84 -3.56 5.69 
+                        4.31 4.31<BR><BR>$hbox 5 "Bip01 R Arm1" -1.88 -2.47 
+                        -2.16 11.81 3.28 2.81<BR><BR>$hbox 5 "Bip01 R Arm2" 0.44 
+                        -1.97 -2.34 10.59 2.72 2.22<BR><BR>$hbox 5 "Bip01 R 
+                        Hand" 0.00 -1.00 -2.00 3.00 1.50 3.50<BR><BR><BR><BR>// 
+                        basic animations<BR><BR>$sequence idle "idle" loop fps 8 
+                        ACT_IDLE 1<BR><BR>$sequence idle2 "idle2" loop fps 10 
+                        ACT_IDLE 3<BR><BR></FONT><FONT color=#ff0000>// Here are 
+                        two idle animations, both called <BR>ACT_IDLE. The game 
+                        can randomly pick one to play based on<BR><BR>// it's 
+                        multiplier. idle2 will be chosen 3 times more often than 
+                        the other.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$sequence walk "walk" LX 
+                        fps 10 loop ACT_WALK 1 {<BR><BR>{ event 1004 10 
+                        "footstep1.wav" } { event 1004 20 "footstep2.wav" 
+                        <BR>}<BR><BR>}<BR><BR>$sequence run "run" LX fps 25 loop 
+                        ACT_RUN 1 {<BR><BR>{ event 1004 10 "footstep1.wav" } { 
+                        event 1004 20 "footstep2.wav" 
+                        <BR>}<BR><BR>}<BR><BR></FONT><FONT color=#ff0000>// LX 
+                        is used to extract out the forward motion <BR>on the 
+                        X-axis. Then event 1004 is used to play footstep sounds 
+                        on frames <BR>10 and 20. This is when the model's feet 
+                        touch the ground.</FONT><BR><FONT 
+                        color=#000000><BR><BR>$sequence turnleft "turnl" fps 15 
+                        ACT_TURN_LEFT 1<BR><BR>$sequence turnright "turnr" fps 
+                        15 ACT_TURN_RIGHT 1<BR><BR><BR><BR>// 
+                        attacks<BR><BR>$sequence shoot1 "shoot1up" "shoot1down" 
+                        loop fps 20 <BR>blend XR -50 50 ACT_RANGE_ATTACK1 1 
+                        {<BR><BR>{ event 5001 1 "21" } { event 6 1 
+                        }<BR><BR>}<BR><BR>$sequence shoot2 "shoot2up" 
+                        "shoot2down" loop fps 25 <BR>blend XR -50 50 
+                        ACT_RANGE_ATTACK1 3 {<BR><BR>{ event 5001 1 "21" } { 
+                        event 6 1 }<BR><BR>}<BR><BR>$sequence shootcrouch 
+                        "shoot_crouchdown" "shoot_crouchup" <BR>loop fps 20 
+                        blend XR -50 50 ACT_RANGE_ATTACK2 1 { event 5001 1 "21" 
+                        <BR>} { event 6 1 }<BR><BR></FONT><FONT color=#ff0000>// 
+                        These shooting animations have event 5001 <BR>show 
+                        muzzleflash2.spr on frame 1 and run event # 6 also 
+                        on<BR><BR>// frame 1. I use 5001 because it's origin is 
+                        set to $attachment 0. Event <BR>6 is defined in monster 
+                        AI<BR><BR>// as the actual code that shoots the enemy. 
+                        Plus the <STRONG>blend</STRONG> <BR>command is used to 
+                        combine these two<BR><BR>// animations to get an 
+                        accurate angle towards the enemy.</FONT><FONT<BR /> 
+                        color="#000000"&gt;<BR><BR><BR><BR>$sequence punch 
+                        "punch_down" "punch_up" loop fps 20 <BR>blend XR -50 50 
+                        ACT_MELEE_ATTACK1 1 { event 7 5 }<BR><BR></FONT><FONT 
+                        color=#ff0000>// Event 7 is a code event that knocks the 
+                        <BR>player around on frame 5, since this is a melee 
+                        attack.</FONT><FONT<BR /> 
+                        color="#000000"&gt;<BR><BR><BR><BR>$sequence reload 
+                        "reload" fps 15 ACT_RELOAD 1<BR><BR>$sequence draw 
+                        "draw_weapon" fps 25 ACT_ARM 1 { event 4 10 
+                        }<BR><BR></FONT><FONT color=#ff0000>// Event 4 is a code 
+                        event that changes the <BR>weapon bodygroup to the 
+                        pistol.</FONT><FONT 
+                        color=#000000><BR><BR><BR><BR>$sequence holster 
+                        "holster_weapon" fps 10 ACT_DISARM 1 { event <BR>5 15 
+                        }<BR><BR></FONT><FONT color=#ff0000>// Event 5 is a code 
+                        event that changes the <BR>weapon bodygroup to the blank 
+                        one so the monster<BR><BR>// isn't holding the pistol 
+                        anymore.</FONT><FONT color=#000000><BR><BR><BR><BR>// 
+                        pain &amp; death<BR><BR>$sequence flinch_sm "flinch_sm" 
+                        fps 20 ACT_SMALL_FLINCH 1<BR><BR>$sequence lflinch 
+                        "leftarm_flinch" fps 15 ACT_FLINCH_LEFTARM 
+                        1<BR><BR>$sequence rflinch "rightarm_flinch" fps 15 
+                        ACT_FLINCH_RIGHTARM <BR>1<BR><BR>$sequence diesimple 
+                        "death" X fps 20 ACT_DIESIMPLE 1 { event 2001 <BR>10 
+                        }<BR><BR>$sequence dieviolent "die_violent" X fps 25 
+                        ACT_DIE_HEADSHOT 1 <BR>{ event 2001 10 
+                        }<BR><BR></FONT><FONT color=#ff0000>// Event 2001 tells 
+                        the game that this monster <BR>is dead on frame 
+                        10.<BR><BR></FONT><FONT color=#000000><BR><BR>// 
+                        scripted sequences<BR><BR>$sequence blowupbuilding 
+                        "blowupbuilding" fps 25 {<BR><BR>{ event 1004 28 
+                        "buttonpress.wav" }<BR><BR>{ event 1003 30 
+                        "bigexplosion" }<BR><BR>{ event 2001 50 
+                        }<BR><BR>}<BR><BR></FONT><FONT color=#ff0000>// Here's a 
+                        scripted sequence that uses event <BR>1004 to play a 
+                        sound on frame 28. The monster has hit a button to 
+                        detonate <BR>explosives. Then event 1003 triggers the 
+                        sequence "bigexplosion" <BR>in the map on frame 30. The 
+                        monster dies so event 2001 tells the game that <BR>it's 
+                        dead on frame 
+              50.</FONT></TD><BR></TR><BR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE><BR>
+    </TD></TR></TBODY></TABLE>
+	</BODY></HTML>

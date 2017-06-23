@@ -1,0 +1,120 @@
+BODY {
+	FONT-SIZE: 11px; MARGIN: 100px; COLOR: #fff; FONT-FAMILY: Verdana, Tahoma, Arial, sans-serif; BACKGROUND-COLOR: #000000
+}
+A:link {
+	COLOR: #e0823d; BACKGROUND-COLOR: transparent; TEXT-DECORATION: underline
+}
+A:visited {
+	COLOR: #e0823d; BACKGROUND-COLOR: transparent; TEXT-DECORATION: underline
+}
+A:active {
+	COLOR: #e0823d; BACKGROUND-COLOR: transparent; TEXT-DECORATION: underline
+}
+A:hover {
+	COLOR: #707070; BACKGROUND-COLOR: transparent
+}
+TD.logo {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: #000000; PADDING-BOTTOM: 0px; WIDTH: 100%; COLOR: #000000; PADDING-TOP: 0px; HEIGHT: 104px
+}
+.wavelengthlogo {
+	BACKGROUND: url(/images/classic/header.jpg) #000; FLOAT: left; WIDTH: 419px; COLOR: #000000; HEIGHT: 104px
+}
+.headerbar {
+	PADDING-RIGHT: 6px; BORDER-TOP: #636363 1px solid; PADDING-LEFT: 6px; FONT-SIZE: 11px; BACKGROUND: #1f1f1f; PADDING-BOTTOM: 6px; WIDTH: 100%; COLOR: #ffffff; PADDING-TOP: 6px; BORDER-BOTTOM: #636363 1px solid; HEIGHT: 27px
+}
+.content {
+	PADDING-RIGHT: 15px; PADDING-LEFT: 15px; FONT-SIZE: 13px; PADDING-BOTTOM: 15px; VERTICAL-ALIGN: top; PADDING-TOP: 15px
+}
+.infobar {
+	PADDING-RIGHT: 15px; PADDING-LEFT: 15px; PADDING-BOTTOM: 15px; VERTICAL-ALIGN: top; WIDTH: 200px; PADDING-TOP: 15px
+}
+.sidebar {
+	PADDING-RIGHT: 15px; PADDING-LEFT: 15px; PADDING-BOTTOM: 15px; VERTICAL-ALIGN: top; WIDTH: 150px; PADDING-TOP: 15px
+}
+.cellheader {
+	BORDER-RIGHT: #636363 1px solid; PADDING-RIGHT: 6px; BORDER-TOP: #636363 1px solid; PADDING-LEFT: 6px; FONT-WEIGHT: bold; FONT-SIZE: 15px; BACKGROUND: #1f1f1f; PADDING-BOTTOM: 2px; BORDER-LEFT: #636363 1px solid; COLOR: #ffffff; PADDING-TOP: 2px; BORDER-BOTTOM: #636363 1px solid; HEIGHT: 24px; TEXT-ALIGN: center
+}
+.cellbody {
+	BORDER-RIGHT: #636363 1px solid; PADDING-RIGHT: 6px; PADDING-LEFT: 6px; FONT-SIZE: 10px; BACKGROUND: #2f2f2f; PADDING-BOTTOM: 6px; BORDER-LEFT: #636363 1px solid; COLOR: #ffffff; PADDING-TOP: 6px; BORDER-BOTTOM: #636363 1px solid
+}
+.contentbody {
+	BORDER-RIGHT: #636363 1px solid; PADDING-RIGHT: 6px; PADDING-LEFT: 6px; FONT-SIZE: 11px; BACKGROUND: #2f2f2f; PADDING-BOTTOM: 6px; BORDER-LEFT: #636363 1px solid; COLOR: #ffffff; PADDING-TOP: 6px; BORDER-BOTTOM: #636363 1px solid
+}
+.contentbodysubheader {
+	BORDER-RIGHT: #636363 1px solid; PADDING-RIGHT: 4px; PADDING-LEFT: 4px; FONT-SIZE: 11px; PADDING-BOTTOM: 4px; BORDER-LEFT: #636363 1px solid; COLOR: #ffffff; PADDING-TOP: 4px; BACKGROUND-COLOR: #1f1f1f
+}
+.contenttablebody {
+	BORDER-RIGHT: #636363 1px solid; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 11px; BACKGROUND: #636363; PADDING-BOTTOM: 0px; BORDER-LEFT: #636363 1px solid; COLOR: #ffffff; PADDING-TOP: 0px; BORDER-BOTTOM: #636363 1px solid
+}
+.cpcontent {
+	BORDER-RIGHT: #636363 1px solid; PADDING-RIGHT: 4px; PADDING-LEFT: 4px; FONT-SIZE: 11px; BACKGROUND: #2f2f2f; PADDING-BOTTOM: 4px; BORDER-LEFT: #636363 1px solid; COLOR: #ffffff; PADDING-TOP: 4px; BORDER-BOTTOM: #636363 1px solid
+}
+.contenttablecell {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; FONT-SIZE: 11px; BACKGROUND: #2f2f2f; PADDING-BOTTOM: 4px; COLOR: #ffffff; PADDING-TOP: 4px
+}
+.contenttablecelldark {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; FONT-SIZE: 11px; BACKGROUND: #1f1f1f; PADDING-BOTTOM: 4px; COLOR: #ffffff; PADDING-TOP: 4px
+}
+.contenttableheader {
+	BORDER-RIGHT: #636363 1px solid; PADDING-RIGHT: 4px; BORDER-TOP: #636363 1px solid; PADDING-LEFT: 4px; FONT-WEIGHT: bold; FONT-SIZE: 11px; BACKGROUND: #2f2f2f; PADDING-BOTTOM: 4px; BORDER-LEFT: #636363 1px solid; COLOR: #ffffff; PADDING-TOP: 4px; BORDER-BOTTOM: #636363 1px solid; WHITE-SPACE: nowrap; TEXT-ALIGN: center
+}
+.latestarticlesbox {
+	BORDER-RIGHT: #636363 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #636363 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 10px; BACKGROUND: #000000; PADDING-BOTTOM: 2px; BORDER-LEFT: #636363 1px solid; COLOR: #ffffff; PADDING-TOP: 2px; BORDER-BOTTOM: #636363 1px solid
+}
+.contentheader {
+	FONT-WEIGHT: bold; FONT-SIZE: 13px; FLOAT: left
+}
+.headeroption {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; FLOAT: right
+}
+.postright {
+	FONT-SIZE: 9px; FLOAT: right; TEXT-ALIGN: right
+}
+.image {
+	BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px
+}
+.point {
+	BACKGROUND-POSITION: left center; BACKGROUND-IMAGE: url(/images/classic/smarrow.gif); TEXT-INDENT: 9px; BACKGROUND-REPEAT: no-repeat
+}
+.input {
+	FONT-SIZE: 11px; VERTICAL-ALIGN: middle; FONT-FAMILY: Verdana, Tahoma, Arial, sans-serif
+}
+FIELDSET {
+	BORDER-TOP-WIDTH: 0px; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; BORDER-RIGHT-WIDTH: 0px
+}
+TD.styleheader {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; TEXT-ALIGN: left
+}
+TD.postQUOTE {
+	BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #000000 1px solid; COLOR: black; BORDER-BOTTOM: #000000 1px solid; BACKGROUND-COLOR: #acacac; TEXT-ALIGN: left
+}
+TD.postCODE {
+	BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #000000 1px solid; COLOR: black; BORDER-BOTTOM: #000000 1px solid; FONT-FAMILY: "Courier New", sans-serif; BACKGROUND-COLOR: #acacac; TEXT-ALIGN: left
+}
+.copyright {
+	FONT-SIZE: 9px; FONT-STYLE: italic
+}
+.wlversion {
+	FONT-SIZE: 9px
+}
+.cppdirective {
+	COLOR: #0000ff; BACKGROUND-COLOR: transparent
+}
+.cppkeyword {
+	COLOR: #0000ff; BACKGROUND-COLOR: transparent
+}
+.cppnumber {
+	COLOR: #7f0000; BACKGROUND-COLOR: transparent
+}
+.cppquote {
+	COLOR: #00007f; BACKGROUND-COLOR: transparent
+}
+.cppcomment {
+	COLOR: #007f00; BACKGROUND-COLOR: transparent
+}
+.adminname {
+	COLOR: #f1c5c9; BACKGROUND-COLOR: transparent; TEXT-DECORATION: underline
+}
+.modname {
+	COLOR: #c6cef0; BACKGROUND-COLOR: transparent; TEXT-DECORATION: underline
+}
